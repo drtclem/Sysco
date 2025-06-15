@@ -1,4 +1,4 @@
-![Sysco Logo](Sysco/Logo.png)
+![Sysco Logo](Logo.png)
 
 # Weekly Revenue Forecasting
 
