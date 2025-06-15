@@ -1,3 +1,5 @@
+![Sysco Logo](Sysco/Images/Logo.png)
+
 # Weekly Revenue Forecasting
 
 ## Project Overview  
