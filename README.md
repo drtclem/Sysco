@@ -1,49 +1,37 @@
-# 4Geeks data science project boilerplate
+# Weekly Revenue Forecasting
 
-Minimal Python 3.11 repository for 4Geeks data science assignments. Several useful Python packages and VSCode extensions are installed on Codespace boot-up. Directories for models and data are created within the Codespace but excluded from tracking.
+## Project Overview  
+The goal of this project was to build a machine learning pipeline to forecast weekly revenue for the next 12 weeks using historical data provided in a structured database. The dataset included weekly sales figures and metadata for three U.S. cities: Houston, San Francisco, and Spokane.
 
-## 1. Set-up
+## Approach  
+Each city was modeled separately to account for local dynamics and seasonality. Despite variations in absolute revenue and trends, the time series for all three cities followed similar patterns and were well-modeled using the same class of forecasting models.
 
-Fork this repository by clicking the *Fork* button at the upper right. Make sure to set 4Geeks as the owner of the new fork - this way 4Geeks pays for your codespace usage. Then start a Codespace on your fork by clicking the green *Code* button and then '**+**' icon under Codespaces in the drop-down menu.
+Key steps included:
 
-## 2. Environment
+- Loading and cleaning the time series data for each city  
+- Aggregating revenue at the weekly level  
+- Checking for stationarity using the Augmented Dickey-Fuller test  
+- Applying log transformation and differencing where appropriate  
+- Fitting SARIMA and ARIMA models depending on seasonality and data availability  
+- Generating 12-week forecasts and validating in-sample predictions
 
-### 2.1. Repository structure
+## Final Models  
+Each city was best modeled using a version of ARIMA or SARIMA with:  
+- Non-seasonal and seasonal moving average components  
+- First differencing to achieve stationarity  
+- Optional seasonal components (period=12) when the data length allowed for it  
 
-```text
-.
-├──.devcontainer
-│   └── devcontainer.json
-│
-├── src
-│   └── project.ipynb
-│
-├── .gitignore
-├── LICENSE
-├── README.md
-└── requirements.txt
-```
+The models demonstrated strong in-sample performance and produced consistent short-term forecasts that captured both level and trend.
 
-### 2.2. Python
-**Base image**: [Python 3.11](https://github.com/devcontainers/images/tree/main/src/python)
+## Notes  
+- All modeling was done in Python using pandas, statsmodels, and matplotlib  
+- Data was handled and visualized independently for each city  
+- Forecasts were generated directly from the fitted models without manual reintegration or post-processing  
+- Residuals were evaluated for autocorrelation and heteroskedasticity, with non-normality tolerated due to the nature of revenue data  
+- Forecast outputs were prepared in both log and real revenue scales depending on the model pipeline  
 
-Packages installed via `requirements.txt`:
-
-1. [numpy 2.2.3](https://numpy.org/doc/stable/index.html)
-2. [pandas 2.2.3](https://pandas.pydata.org/docs/)
-3. [scikit-learn 1.6.1](https://scikit-learn.org/stable/index.html)
-4. [matplotlib 3.10.1](https://matplotlib.org/stable/index.html)
-5. [seaborn 0.13.2](https://seaborn.pydata.org/)
-6. [ipykernel 6.29.5](https://pypi.org/project/ipykernel/)
-
-If you need to install additional Python packages, you can do so via the terminal with: `pip install packagename`.
-
-### 2.3. VSCode extensions
-
-Sepcified via `devcontainier.json`.
-
-1. [ms-python.python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-2. [ms-toolsai.jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
-3. [streetsidesoftware.code-spell-checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-
-VSCode extensions can be added via the *Extensions* tab located on the activities panel at the left once inside the Codespace.
+## Next Steps  
+To improve accuracy or adapt the models for production use, future enhancements could include:  
+- Incorporating exogenous variables such as promotions, holidays, or weather  
+- Automating model selection and tuning  
+- Deploying a dashboard to visualize real-time forecasts and historical trends
