@@ -5,6 +5,13 @@
 ## Project Overview  
 The goal of this project was to build a machine learning pipeline to forecast weekly revenue for the next 12 weeks using historical data provided in a structured database. The dataset included weekly sales figures and metadata for three U.S. cities: Houston, San Francisco, and Spokane.
 
+
+1. [EDA](https://github.com/drtclem/Sysco/blob/main/src/EDA.ipynb)
+2. [Houston Modeling](https://github.com/drtclem/Sysco/blob/main/src/Houston.ipynb)
+3. [Spokane Modeling](https://github.com/drtclem/Sysco/blob/main/src/Spokane.ipynb)
+4. [San Francisco Modeling](https://github.com/drtclem/Sysco/blob/main/src/SF.ipynb)
+5. [Final Output CSV](https://github.com/drtclem/Sysco/blob/main/src/Full_Combined_Forecast.csv) 
+
 ## Approach  
 Each city was modeled separately to account for local dynamics and seasonality. Despite variations in absolute revenue and trends, the time series for all three cities followed similar patterns and were well-modeled using the same class of forecasting models.
 
